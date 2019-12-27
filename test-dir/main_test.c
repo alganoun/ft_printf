@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/28 11:35:26 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/28 15:27:29 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/18 12:15:24 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,9 +19,13 @@ int ft_calculs(int n1, ...)
 
 	va_list(list);
 	va_start(list, n1);
-	n2 = (int)va_arg(list, int);
+	while (*n1)
+	{
+		n2 = (int)va_arg(list, int);
+		n1 = n1 + n2;
+	}
 	va_end(list);
-	return(n1 + n2);
+	return(n1);
 }
 
 int		main()

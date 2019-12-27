@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test_printf.c                                    .::    .:/ .      .::   */
+/*   libft_printf.h                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/28 15:35:05 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 14:41:10 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/27 15:09:20 by alganoun     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/27 19:01:03 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef LIBFT_PRINTF_H
+# define LIBFT_PRINTF_H
 
-int		main()
+# include <unistd.h>
+# include <stdarg.h>
+
+typedef struct		s_list
 {
-	int nb = 25;
-	char *str = "coucou est ce que tu vas bien ?";
+	char 			conv;
+	int				width;
 
-	printf("coucou%");
-	return (0);
-}
+
+}					t_list;
+
+#endif

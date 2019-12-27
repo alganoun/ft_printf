@@ -5,15 +5,16 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/09 12:49:42 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 13:13:30 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/27 18:58:45 by alganoun     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/27 20:48:26 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft_printf.h"
 
-int		ft_printf(const char *str, ...)
+
+int		ft_printf(const char str, ...)
 {
 
 }
