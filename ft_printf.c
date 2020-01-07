@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 18:58:45 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/31 17:21:31 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/07 16:51:45 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,14 +35,30 @@ int		ft_initiate(t_list **flags)
 	return (0);
 }
 
+void ft_conversion(va_list lst, t_list *flags)
+{
+	int		x;
+	char	*s;
+
+	x = 0;
+	s = NULL;
+	if (flags->type == s)
+		s = va_arg(lst, char *);
+	else
+		x = va_arg(lst, int);
+	ft_type_selection(x, s, flags);
+}
+
 int		ft_printf(const char *str, ...)
 {
 	int		i;
 	char	*s;
 	t_list	*flags;
+	va_list lst;
 
 	i = 0;
 	s = (char *)str;
+	va_start(lst, str);
 	if (ft_initiate(&flags) == -1)
 		return (-1);
 	while (s[i])
@@ -50,17 +66,19 @@ int		ft_printf(const char *str, ...)
 		if (s[i] == '%')
 		{
 			i = i + ft_parsing(&s[i + 1], &flags) + 1;
+
 			//ft_conversion()
 		}
 		else
 			ft_printf_write(s[i], &flags);
 		i++;
 	}
-	write(1, "\n", 1);
-	printf("%d\n", flags->flags);
-	printf("%d\n", flags->width);
-	printf("%d\n", flags->precs);
-	printf("%d\n", flags->type);
-	printf("%d", flags->ret);
 	return (flags->ret);
 }
+
+/*	write(1, "\n", 1);
+	printf("flags = * %c *\n", flags->flags);
+	printf("width = * %d *\n", flags->width);
+	printf("precision = * %d *\n", flags->precs);
+	printf("conversion type = * %c *\n", flags->type);
+	printf("return = * %d *", flags->ret);
