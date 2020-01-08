@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/07 16:51:49 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 17:53:49 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 18:23:23 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,10 +30,13 @@ void	str_conversion(char *str, t_list *flags)
 	int len;
 
 	len = 0;
+	if (!str)
+		str = "(null)";
 	if (flags->precs > 0)
 		len = flags->precs;
 	else
 		len = ft_strlen(str);
+
 	if (flags->flags == '-')
 	{
 		ft_putstr(str, flags, len);
