@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 15:09:20 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 18:33:14 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 17:30:28 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,10 +21,10 @@
 typedef struct		s_list
 {
 	int				ret;
-	int				flags;
-	int				width;
-	int				precs;
-	int 			type;
+	unsigned int	flags;
+	unsigned int	width;
+	unsigned int	precs;
+	unsigned int 	type;
 }					t_list;
 
 int		ft_printf(const char *str, ...)
@@ -36,6 +36,9 @@ int		ft_printf(const char *str, ...);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
-void	ft_printf_write(char c, t_list **flags);
+int		ft_strlen(char *str);
+void	ft_printf_write(int c, t_list **flags, int nb);
+void	type_selection(int x, char *s, t_list *flags);
+void	ft_putstr(char *str, t_list *flags, int nb);
 
 #endif

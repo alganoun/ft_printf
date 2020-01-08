@@ -6,14 +6,14 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/31 17:42:24 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 11:28:31 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 17:55:01 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft_printf.h"
 
-int	ft_isdigit(int c)
+int		ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
@@ -29,6 +29,28 @@ int		ft_isalpha(int c)
 		return (0);
 }
 
+int		ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	ft_putstr(char *str, t_list *flags, int nb)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && nb != 0)
+	{
+		ft_printf_write(str[i], &flags, 1);
+		i++;
+		nb--;
+	}
+}
 int		ft_atoi(const char *str)
 {
 	int i;

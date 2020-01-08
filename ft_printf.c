@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 18:58:45 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 16:51:45 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 17:55:43 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,10 +14,14 @@
 #include "libft_printf.h"
 #include <stdio.h>
 
-void	ft_printf_write(char c, t_list **flags)
+void	ft_printf_write(int c, t_list **flags, int nb)
 {
-	write(1, &c, 1);
-	(*flags)->ret++;
+	while(nb > 0)
+	{
+		write(1, &c, 1);
+		(*flags)->ret++;
+		nb--;
+	}
 }
 
 int		ft_initiate(t_list **flags)
@@ -27,7 +31,7 @@ int		ft_initiate(t_list **flags)
 	if (*flags)
 	{
 		(*flags)->flags = 0;
-		(*flags)->width = 0;
+		(*flags)->width = 1;
 		(*flags)->precs = 0;
 		(*flags)->type= 0;
 		(*flags)->ret = 0;
@@ -35,18 +39,18 @@ int		ft_initiate(t_list **flags)
 	return (0);
 }
 
-void ft_conversion(va_list lst, t_list *flags)
+void	ft_conversion(va_list lst, t_list *flags)
 {
 	int		x;
 	char	*s;
 
 	x = 0;
 	s = NULL;
-	if (flags->type == s)
+	if (flags->type == 's')
 		s = va_arg(lst, char *);
 	else
 		x = va_arg(lst, int);
-	ft_type_selection(x, s, flags);
+	type_selection(x, s, flags);
 }
 
 int		ft_printf(const char *str, ...)
@@ -66,19 +70,19 @@ int		ft_printf(const char *str, ...)
 		if (s[i] == '%')
 		{
 			i = i + ft_parsing(&s[i + 1], &flags) + 1;
-
-			//ft_conversion()
+			ft_conversion(lst, flags);
 		}
 		else
-			ft_printf_write(s[i], &flags);
+			ft_printf_write(s[i], &flags, 1);
 		i++;
 	}
+
 	return (flags->ret);
 }
 
-/*	write(1, "\n", 1);
-	printf("flags = * %c *\n", flags->flags);
-	printf("width = * %d *\n", flags->width);
-	printf("precision = * %d *\n", flags->precs);
-	printf("conversion type = * %c *\n", flags->type);
-	printf("return = * %d *", flags->ret);
+			//		write(1, "\n", 1);
+			//		printf("flags = * %c *\n", flags->flags);
+			//		printf("width = * %d *\n", flags->width);
+			//		printf("precision = * %d *\n", flags->precs);
+			//		printf("conversion type = * %c *\n", flags->type);
+			//		printf("return = * %d *", flags->ret);
