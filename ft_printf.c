@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 18:58:45 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 17:55:43 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 15:47:25 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 void	ft_printf_write(int c, t_list **flags, int nb)
 {
-	while(nb > 0)
+	while (nb > 0)
 	{
 		write(1, &c, 1);
 		(*flags)->ret++;
@@ -26,14 +26,15 @@ void	ft_printf_write(int c, t_list **flags, int nb)
 
 int		ft_initiate(t_list **flags)
 {
-	if(!(*flags = malloc(sizeof(t_list))))
+	if (!(*flags = malloc(sizeof(t_list))))
 		return (-1);
 	if (*flags)
 	{
 		(*flags)->flags = 0;
 		(*flags)->width = 1;
 		(*flags)->precs = 0;
-		(*flags)->type= 0;
+		(*flags)->pr_nb = 0;
+		(*flags)->type = 0;
 		(*flags)->ret = 0;
 	}
 	return (0);
@@ -76,13 +77,14 @@ int		ft_printf(const char *str, ...)
 			ft_printf_write(s[i], &flags, 1);
 		i++;
 	}
-
+	//write(1, "\n", 1);
+	//printf("flags = * %c *\n", flags->flags);
+	//printf("width = * %d *\n", flags->width);
+	//printf("precision = * %d *\n", flags->precs);
+	//printf("precision number = * %d *\n", flags->pr_nb);
+	//printf("conversion type = * %c *\n", flags->type);
+	//printf("return = * %d *", flags->ret);
+	if (flags)
+		free(flags);
 	return (flags->ret);
 }
-
-			//		write(1, "\n", 1);
-			//		printf("flags = * %c *\n", flags->flags);
-			//		printf("width = * %d *\n", flags->width);
-			//		printf("precision = * %d *\n", flags->precs);
-			//		printf("conversion type = * %c *\n", flags->type);
-			//		printf("return = * %d *", flags->ret);
