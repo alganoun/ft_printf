@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 12:14:56 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 16:11:45 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 18:14:54 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,17 +17,21 @@ int		ft_digit_nb(int nb)
 {
 	int digit_nb;
 
+	digit_nb = 0;
 	if (nb < 0)
 	{
 		digit_nb++;
 		nb = -nb;
 	}
+	else if (nb == 0)
+		return (1);
 	while (nb != 0)
 	{
 		nb = nb / 10;
-		 digit_nb++;
+		digit_nb++;
 	}
 	return (digit_nb);
+}
 
 void	ft_putnbr_base(int nb, t_list *flags, char *base)
 {

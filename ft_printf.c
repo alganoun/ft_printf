@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 18:58:45 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 15:47:25 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 17:56:30 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,13 +77,13 @@ int		ft_printf(const char *str, ...)
 			ft_printf_write(s[i], &flags, 1);
 		i++;
 	}
-	//write(1, "\n", 1);
-	//printf("flags = * %c *\n", flags->flags);
-	//printf("width = * %d *\n", flags->width);
-	//printf("precision = * %d *\n", flags->precs);
-	//printf("precision number = * %d *\n", flags->pr_nb);
-	//printf("conversion type = * %c *\n", flags->type);
-	//printf("return = * %d *", flags->ret);
+	write(1, "\n", 1);
+	printf("flags = * %c *\n", flags->flags);
+	printf("width = * %d *\n", flags->width);
+	printf("precision = * %d *\n", flags->precs);
+	printf("precision number = * %d *\n", flags->pr_nb);
+	printf("conversion type = * %c *\n", flags->type);
+	printf("return = * %d *", flags->ret);
 	if (flags)
 		free(flags);
 	return (flags->ret);

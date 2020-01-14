@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 15:09:20 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 17:10:01 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 17:24:19 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,5 +42,6 @@ int		ft_digit_nb(int nb);
 void	ft_printf_write(int c, t_list **flags, int nb);
 void	type_selection(int x, char *s, t_list *flags);
 void	ft_putstr(char *str, t_list *flags, int nb);
+void	ft_putnbr_base(int nb, t_list *flags, char *base);
 
 #endif

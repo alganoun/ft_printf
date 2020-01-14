@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/07 16:51:49 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 20:27:47 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 18:12:00 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,29 +50,51 @@ void	str_conversion(char *str, t_list *flags)
 		ft_printf_write(' ', &flags, flags->width - len);
 		ft_putstr(str, flags, len);
 	}
-
 }
 
 void	int_conversion(int x, t_list *flags)
 {
-	int digit_nb;
+	unsigned int digit_nb;
+	unsigned int digit_nb2;
 
 	digit_nb = ft_digit_nb(x);
-	if (flags->flags != '0' && flags->precs == 0)
+	digit_nb2 = digit_nb;
+	if (flags->flags == 0)
 	{
-		ft_printf_write('0', &flags, flags->width - digit_nb);
+		if (flags->precs == 1)
+		{
+			if (flags->pr_nb > digit_nb)
+				digit_nb2 = flags->pr_nb;
+			if (flags->width > digit_nb2)
+				ft_printf_write(' ', &flags, (flags->width - digit_nb2));
+			if (flags->pr_nb > digit_nb)
+				ft_printf_write('0', &flags, (flags->pr_nb - digit_nb));
+		}
+		else
+		{
+			if (flags->width > digit_nb)
+				ft_printf_write(' ', &flags, (flags->width - digit_nb));
+		}
 	}
-	if (flags->width && flags->flags != '-')
+	else if (flags->flags == '0')
 	{
-		ft_printf_write(' ', &flags, flags->width - digit_nb);
-		if (x < 0)
-			ft_printf_write('-', &flags, 1);
-		if (flags->pr_nb > digit_nb)
-			ft_printf_write('0', &flags, (flags->pr_nb - digit_nb));
+		if (flags->precs == 1)
+		{
+			if (flags->pr_nb > digit_nb)
+				digit_nb2 = flags->pr_nb;
+			if (flags->width > digit_nb2)
+				ft_printf_write(' ', &flags, (flags->width - digit_nb2));
+			if (flags->pr_nb > digit_nb)
+				ft_printf_write('0', &flags, (flags->pr_nb - digit_nb));
+		}
+		else
+		{
+			if (flags->width > digit_nb)
+				ft_printf_write('0', &flags, (flags->width - digit_nb));
+		}
 	}
-	ft_putnbr_base(int x, &flags, "012345679");
-	if (flags->flags == '-')
-		ft_printf_write('0', &flags, (flags->width - (digit_nb + flags->pr_nb)))
+	if (x != 0 || flags->precs != 1)
+		ft_putnbr_base(x, flags, "0123456789");
 }
 
 void	type_selection(int x, char *s, t_list *flags)
@@ -81,8 +103,8 @@ void	type_selection(int x, char *s, t_list *flags)
 		char_conversion(x, flags);
 	else if (flags->type == 's')
 		str_conversion(s, flags);
-	// /else if (flags->type == 'd' || flags->type == 'i')
-//		int_conversion(x, flags);
+	else if (flags->type == 'd' || flags->type == 'i')
+		int_conversion(x, flags);
 	/*else if (flags->type == 'p')
 		adrs_conversion(x, flags);
 	else if (flags->type == 'u')

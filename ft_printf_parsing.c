@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/28 12:48:55 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 14:20:17 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 18:01:47 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,7 +41,7 @@ int		ft_parsing(char *str, t_list **flags)
 			if (i == 0 && (str[i] == '-' || str[i] == '0'))
 				(*flags)->flags = str[i];
 			else if (ft_isdigit(str[i]) == 1 &&
-				(ft_isdigit(str[i - 1]) == 0 || i == 0))
+				(ft_isdigit(str[i - 1]) == 0 || i == 0 || str[i - 1] == '0'))
 			{
 				if (i == 1 || i == 0)
 					(*flags)->width = ft_atoi(&str[i]);
