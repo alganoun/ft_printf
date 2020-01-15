@@ -6,12 +6,13 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/07 16:51:49 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 18:12:00 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/15 16:37:05 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft_printf.h"
+#include <stdio.h>
 
 void	char_conversion(int x, t_list *flags)
 {
@@ -54,62 +55,56 @@ void	str_conversion(char *str, t_list *flags)
 
 void	int_conversion(int x, t_list *flags)
 {
-	unsigned int digit_nb;
-	unsigned int digit_nb2;
+	size_t digit_nb;
+	size_t digit_nb2;
 
 	digit_nb = ft_digit_nb(x);
 	digit_nb2 = digit_nb;
-	if (flags->flags == 0)
+	if (flags->flags == NO || flags->flags == '-')
 	{
-		if (flags->precs == 1)
-		{
-			if (flags->pr_nb > digit_nb)
-				digit_nb2 = flags->pr_nb;
-			if (flags->width > digit_nb2)
-				ft_printf_write(' ', &flags, (flags->width - digit_nb2));
-			if (flags->pr_nb > digit_nb)
-				ft_printf_write('0', &flags, (flags->pr_nb - digit_nb));
-		}
-		else
-		{
-			if (flags->width > digit_nb)
-				ft_printf_write(' ', &flags, (flags->width - digit_nb));
-		}
+		if (flags->precs == YES)
+			digit_nb2 = int_conv_prcss(x, &flags, digit_nb, digit_nb2);
+		else if (flags->width > digit_nb)
+			ft_printf_write(' ', &flags, (flags->width - digit_nb));
 	}
 	else if (flags->flags == '0')
 	{
-		if (flags->precs == 1)
-		{
-			if (flags->pr_nb > digit_nb)
-				digit_nb2 = flags->pr_nb;
-			if (flags->width > digit_nb2)
-				ft_printf_write(' ', &flags, (flags->width - digit_nb2));
-			if (flags->pr_nb > digit_nb)
-				ft_printf_write('0', &flags, (flags->pr_nb - digit_nb));
-		}
-		else
-		{
-			if (flags->width > digit_nb)
-				ft_printf_write('0', &flags, (flags->width - digit_nb));
-		}
+		if (flags->precs == YES)
+			digit_nb2 = int_conv_prcss(x, &flags, digit_nb, digit_nb2);
+		else if (flags->width > digit_nb)
+			ft_printf_write('0', &flags, (flags->width - digit_nb));
 	}
-	if (x != 0 || flags->precs != 1)
+	if ((x != 0 || flags->precs == NO || digit_nb2 != digit_nb) && flags->neg == NO)
 		ft_putnbr_base(x, flags, "0123456789");
+	else if ((flags->precs == NO || digit_nb2 != digit_nb) && flags->neg == YES)
+		ft_putnbr_base(-x, flags, "0123456789");
+	if (flags->flags == '-' && flags->width > digit_nb2)
+		ft_printf_write(' ', &flags, (flags->width - digit_nb2));
 }
 
-void	type_selection(int x, char *s, t_list *flags)
+void	hexa_conversion(int x, t_list *flags)
 {
-	if (flags->type == 'c')
-		char_conversion(x, flags);
-	else if (flags->type == 's')
-		str_conversion(s, flags);
-	else if (flags->type == 'd' || flags->type == 'i')
-		int_conversion(x, flags);
-	/*else if (flags->type == 'p')
-		adrs_conversion(x, flags);
-	else if (flags->type == 'u')
-		unsigned_conversion(x, flags);
-	else if ((flags->type == 'x') || (flags->type == 'X'))
-		hexa_conversion(x, flags);*/
-}
+	size_t digit_nb;
+	size_t digit_nb2;
 
+	digit_nb = ft_digit_hex_nb(x, &flags, "0123456789abcdef");
+	digit_nb2 = digit_nb;
+	if (flags->flags == NO || flags->flags == '-')
+	{
+		if (flags->precs == YES)
+			digit_nb2 = hex_conv_prcss(&flags, digit_nb, digit_nb2);
+		else if (flags->width > digit_nb)
+			ft_printf_write(' ', &flags, (flags->width - digit_nb));
+	}
+	else if (flags->flags == '0')
+	{
+		if (flags->precs == YES)
+			digit_nb2 = hex_conv_prcss(&flags, digit_nb, digit_nb2);
+		else if (flags->width > digit_nb)
+			ft_printf_write('0', &flags, (flags->width - digit_nb));
+	}
+	if ((x != 0 || flags->precs == NO || digit_nb2 != digit_nb) && flags->neg == NO)
+		ft_putnbr_base(x, flags, "0123456789abcdef");
+	if (flags->flags == '-' && flags->width > digit_nb2)
+		ft_printf_write(' ', &flags, (flags->width - digit_nb2));
+}
