@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/07 16:51:49 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/15 16:37:05 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/17 13:05:05 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,12 +82,12 @@ void	int_conversion(int x, t_list *flags)
 		ft_printf_write(' ', &flags, (flags->width - digit_nb2));
 }
 
-void	hexa_conversion(int x, t_list *flags)
+void	hexa_conversion(int y, t_list *flags)
 {
 	size_t digit_nb;
 	size_t digit_nb2;
 
-	digit_nb = ft_digit_hex_nb(x, &flags, "0123456789abcdef");
+	digit_nb = ft_digit_hex_nb(y, &flags, "0123456789abcdef");
 	digit_nb2 = digit_nb;
 	if (flags->flags == NO || flags->flags == '-')
 	{
@@ -103,8 +103,35 @@ void	hexa_conversion(int x, t_list *flags)
 		else if (flags->width > digit_nb)
 			ft_printf_write('0', &flags, (flags->width - digit_nb));
 	}
-	if ((x != 0 || flags->precs == NO || digit_nb2 != digit_nb) && flags->neg == NO)
-		ft_putnbr_base(x, flags, "0123456789abcdef");
+	if ((y != 0 || flags->precs == NO || digit_nb2 != digit_nb) && flags->neg == NO)
+		ft_putnbr_hexa_base(y, flags, "0123456789abcdef");
+	if (flags->flags == '-' && flags->width > digit_nb2)
+		ft_printf_write(' ', &flags, (flags->width - digit_nb2));
+}
+
+void	HEXA_conversion(unsigned int y, t_list *flags)
+{
+	size_t digit_nb;
+	size_t digit_nb2;
+
+	digit_nb = ft_digit_hex_nb(y, &flags, "0123456789ABCDEF");
+	digit_nb2 = digit_nb;
+	if (flags->flags == NO || flags->flags == '-')
+	{
+		if (flags->precs == YES)
+			digit_nb2 = hex_conv_prcss(&flags, digit_nb, digit_nb2);
+		else if (flags->width > digit_nb)
+			ft_printf_write(' ', &flags, (flags->width - digit_nb));
+	}
+	else if (flags->flags == '0')
+	{
+		if (flags->precs == YES)
+			digit_nb2 = hex_conv_prcss(&flags, digit_nb, digit_nb2);
+		else if (flags->width > digit_nb)
+			ft_printf_write('0', &flags, (flags->width - digit_nb));
+	}
+	if ((y != 0 || flags->precs == NO || digit_nb2 != digit_nb) && flags->neg == NO)
+		ft_putnbr_hexa_base(y, flags, "0123456789ABCDEF");
 	if (flags->flags == '-' && flags->width > digit_nb2)
 		ft_printf_write(' ', &flags, (flags->width - digit_nb2));
 }

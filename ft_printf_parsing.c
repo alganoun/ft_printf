@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/28 12:48:55 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/15 10:07:31 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/17 15:55:26 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int		check_charset(char c)
 	char *charset;
 
 	i = 0;
-	charset = "csdxX";
+	charset = "csdpuixX";
 	while (charset[i])
 	{
 		if (charset[i] == c)

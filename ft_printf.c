@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 18:58:45 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/15 16:46:55 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/17 17:05:09 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,7 @@ void	ft_reset(t_list **flags)
 		(*flags)->type = 0;
 		(*flags)->neg = 0;
 		(*flags)->temp = 0;
+		(*flags)->temp2 = 0;
 	}
 }
 
@@ -52,16 +53,26 @@ int		ft_initiate(t_list **flags)
 
 void	ft_conversion(va_list lst, t_list *flags)
 {
-	int		x;
-	char	*s;
+	int				x;
+	unsigned int	y;
+	void			*z;
+	char			*s;
 
 	x = 0;
+	y = 0;
+	z = 0;
 	s = NULL;
 	if (flags->type == 's')
 		s = va_arg(lst, char *);
-	else
+	else if (flags->type == 'd' || flags->type == 'i')
 		x = va_arg(lst, int);
+	else if (flags->type == 'u' || flags->type == 'x' || flags->type == 'X')
+		y = va_arg(lst, unsigned int);
+	else if (flags->type == 'p')
+		z = va_arg(lst, void *);
 	type_selection(x, s, flags);
+	type_selection2(y, z, flags);
+
 }
 
 int		ft_printf(const char *str, ...)
@@ -85,18 +96,17 @@ int		ft_printf(const char *str, ...)
 		}
 		else
 			ft_printf_write(s[i], &flags, 1);
-		write(1, "\n", 1);
-		printf("flags = * %c *\n", flags->flags);
-		printf("width = * %d *\n", flags->width);
-		printf("precision = * %d *\n", flags->precs);
-		printf("precision number = * %d *\n", flags->pr_nb);
-		printf("conversion type = * %c *\n", flags->type);
-		printf("return = * %d\n *", flags->ret);
-		printf("temp = * %d\n *", flags->temp);
-		ft_reset(&flags);
+	//	ft_reset(&flags);
 		i++;
 	}
-
+	write(1, "\n", 1);
+	printf("flags = * %c *\n", flags->flags);
+	printf("width = * %d *\n", flags->width);
+	printf("precision = * %d *\n", flags->precs);
+	printf("precision number = * %d *\n", flags->pr_nb);
+	printf("conversion type = * %c *\n", flags->type);
+	printf("return = * %d\n *", flags->ret);
+	printf("temp = * %d\n *", flags->temp);
 	if (flags)
 		free(flags);
 	return (flags->ret);
