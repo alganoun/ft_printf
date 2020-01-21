@@ -6,22 +6,21 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/31 13:37:52 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/17 17:26:45 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/21 17:19:03 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft_printf.h"
+#include "./includes/libft_printf.h"
 #include <stdio.h>
 #include <unistd.h>
 
 int		main()
 {
- 	char *s = NULL;
+ 	//char *s =  "Coucou est ce que ca va";
 	//int a;
-
-	//a = -456;
-	printf("1 : this is the number i want : %6p\n", s);
-	ft_printf("2 : this is the number i want : %6p\n", s);
+	//a = 456;
+	printf("%010%\n");
+	ft_printf("%010%\n");
 	return (0);
 }
