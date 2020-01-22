@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 12:14:56 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/21 16:15:46 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 15:13:28 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,23 +16,26 @@
 
 void	ft_putnbr_base(int nb, t_list *flags, char *base)
 {
-	int nb_base;
-	int result;
+	int		nb_base;
+	int		result;
+	long	n;
 
+	n = nb;
 	nb_base = ft_strlen(base);
-	if (nb < 0)
+	if (n < 0)
 	{
-		ft_printf_write('-', &flags, 1);
-		result = -(nb % nb_base);
-		nb = -(nb / nb_base);
+		if (flags->neg == NO)
+			ft_printf_write('-', &flags, 1);
+		result = -(n % nb_base);
+		n = -(n / nb_base);
 	}
 	else
 	{
-		result = nb % nb_base;
-		nb = nb / nb_base;
+		result = n % nb_base;
+		n = n / nb_base;
 	}
-	if (nb != 0)
-		ft_putnbr_base(nb, flags, base);
+	if (n != 0)
+		ft_putnbr_base(n, flags, base);
 	ft_printf_write(base[result], &flags, 1);
 }
 

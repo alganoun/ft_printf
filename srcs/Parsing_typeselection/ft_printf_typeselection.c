@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 12:14:40 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/21 17:21:40 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 12:10:01 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ void	type_selection2(unsigned int y, void *z, t_list *flags)
 	else if (flags->type == 'x')
 		hexa_conversion(y, flags);
 	else if (flags->type == 'X')
-		HEXA_conversion(y, flags);
+		hexa2_conversion(y, flags);
 	else if (flags->type == '%')
 		pourcent_conversion(flags);
 }

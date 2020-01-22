@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/27 15:09:20 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/21 17:21:33 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 15:06:22 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,13 +49,14 @@ int		ft_digit_hex_nb(unsigned int nb, t_list **flags, char *base);
 int		ft_adrs_digit_nb(unsigned long nb, t_list **flags, char *base);
 int		ft_unsigned_digit_nb(unsigned int nb);
 int		int_conv_prcss(int x, t_list **flags, int digit_nb, int digit_nb2);
-int		hex_conv_prcss(t_list **flags, int digit_nb, int digit_nb2);
+void	int_conv_prcss2(int x, t_list **flags, int digit_nb);
+int		hex_conv_prcss(unsigned int y, t_list **flags, int digit_nb, int digit_nb2);
 int		adrs_conv_prcss(t_list **flags, int digit_nb, int digit_nb2);
 void	char_conversion(int x, t_list *flags);
 void	str_conversion(char *str, t_list *flags);
 void	int_conversion(int x, t_list *flags);
 void	hexa_conversion(int x, t_list *flags);
-void	HEXA_conversion(unsigned int y, t_list *flags);
+void	hexa2_conversion(unsigned int y, t_list *flags);
 void	adrs_conversion(void *z, t_list *flags);
 void	unsigned_conversion(unsigned int y, t_list *flags);
 void	pourcent_conversion(t_list *flags);

@@ -6,7 +6,7 @@
 /*   By: alganoun <alganoun@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/17 15:35:47 by alganoun     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/21 17:27:08 by alganoun    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 16:28:24 by alganoun    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,29 +26,29 @@ void	pourcent_conversion(t_list *flags)
 
 void	unsigned_conversion(unsigned int y, t_list *flags)
 {
-	int digit_nb;
-	int digit_nb2;
+	int diginb;
+	int diginb2;
 
-	digit_nb = ft_unsigned_digit_nb(y);
-	digit_nb2 = digit_nb;
+	diginb = ft_unsigned_digit_nb(y);
+	diginb2 = diginb;
 	if (flags->flags == NO || flags->flags == '-')
 	{
-		if (flags->precs == YES)
-			digit_nb2 = int_conv_prcss(y, &flags, digit_nb, digit_nb2);
-		else if (flags->width > digit_nb && flags->flags != '-')
-			ft_printf_write(' ', &flags, (flags->width - digit_nb));
+		if (flags->precs == YES && flags->pr_nb >= 0)
+			diginb2 = hex_conv_prcss(y, &flags, diginb, diginb2);
+		else if (flags->width > diginb && flags->flags != '-')
+			ft_printf_write(' ', &flags, (flags->width - diginb));
 	}
 	else if (flags->flags == '0')
 	{
 		if (flags->precs == YES)
-			digit_nb2 = int_conv_prcss(y, &flags, digit_nb, digit_nb2);
-		else if (flags->width > digit_nb)
-			ft_printf_write('0', &flags, (flags->width - digit_nb));
+			diginb2 = hex_conv_prcss(y, &flags, diginb, diginb2);
+		else if (flags->width > diginb)
+			ft_printf_write('0', &flags, (flags->width - diginb));
 	}
-	if (y != 0 || flags->precs == NO || digit_nb2 != digit_nb)
+	if (y != 0 || flags->precs == NO)
 		ft_unsigned_putnbr_base(y, flags, "0123456789");
-	if (flags->flags == '-' && flags->width > digit_nb2)
-		ft_printf_write(' ', &flags, (flags->width - digit_nb2));
+	if (flags->flags == '-' && flags->width > diginb2)
+		ft_printf_write(' ', &flags, (flags->width - diginb2));
 }
 
 void	adrs_conversion(void *z, t_list *flags)
@@ -64,7 +64,7 @@ void	adrs_conversion(void *z, t_list *flags)
 	digit_nb2 = digit_nb;
 	if (flags->flags == NO)
 	{
-		if (flags->precs == YES)
+		if (flags->precs == YES && flags->pr_nb > 0)
 			digit_nb2 = adrs_conv_prcss(&flags, digit_nb, digit_nb2);
 		else if (flags->width > digit_nb)
 			ft_printf_write(' ', &flags, (flags->width - digit_nb));
